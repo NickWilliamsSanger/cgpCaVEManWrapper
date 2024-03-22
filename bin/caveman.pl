@@ -293,6 +293,8 @@ sub setup {
 					'nc|normal-cn=s' => \$opts{'normcn'},
 					't|threads=i' => \$opts{'threads'},
 					'k|normal-contamination=s' => \$opts{'normcont'},
+					'K|tumour-acf=s' => \$opts{'tumouracf'},
+					'L|normal-acf=f' => \$opts{'normalacf'},
 					's|species=s' => \$opts{'species'},
 					'sa|species-assembly=s' => \$opts{'species-assembly'},
 					'p|process=s' => \$opts{'process'},
@@ -443,6 +445,10 @@ sub setup {
 	}
 	else {
 	  $opts{'normcont'} = 0.1;
+	}
+	if(defined $opts{'tumouracf'}) {
+	  ## makes sure normcont matches
+	  $opts{'normcont'} = 1-$opts{'tumouracf'}
 	}
 
 	pod2usage(-msg => "\nERROR: normal-contamination should be <1 even if from ASCAT.samplestatistics.csv file ($opts{normcont}).\n", -verbose => 2,  -output => \*STDERR) unless($opts{'normcont'} =~ m/^0\.?[[:digit:]]*$/);
