@@ -205,7 +205,7 @@ sub caveman_estep {
 	my $cov_arr = $options->{'cave_carr'};
 	my $normprot = $options->{'normprot'};
 	my $tumprot = $options->{'tumprot'};
-
+	
 	for my $index(@indicies) {
     next if PCAP::Threaded::success_exists(File::Spec->catdir($tmp, 'progress'), $index);
 
@@ -213,6 +213,8 @@ sub caveman_estep {
 
     $command .= sprintf($CAVEMAN_ESTEP,
                     $index,
+                    $options->{'tumouracf'},
+                    $options->{'normalacf'},
                     $options->{'normcont'},
                     $cov_arr,
                     $prob_arr,

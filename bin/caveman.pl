@@ -449,6 +449,13 @@ sub setup {
 	if(defined $opts{'tumouracf'}) {
 	  ## makes sure normcont matches
 	  $opts{'normcont'} = 1-$opts{'tumouracf'}
+	}else{
+	  $opts{'tumouracf'}=1-	$opts{'normcont'}
+	}
+	if(defined $opts{'normalacf'}) {
+		
+	}else{
+		$opts{'normalacf'}=0.0;
 	}
 
 	pod2usage(-msg => "\nERROR: normal-contamination should be <1 even if from ASCAT.samplestatistics.csv file ($opts{normcont}).\n", -verbose => 2,  -output => \*STDERR) unless($opts{'normcont'} =~ m/^0\.?[[:digit:]]*$/);
